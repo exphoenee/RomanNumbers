@@ -1,4 +1,4 @@
-function convertToRoman(num) {
+function convertToRoman(arabic) {
   let codes = {
     M: 1000,
     CM: 900,
@@ -16,7 +16,7 @@ function convertToRoman(num) {
   };
 
   let romanNr = "";
-  let remain = num;
+  let remain = arabic;
   for (let code in codes) {
     let charNr = Math.floor(remain / codes[code]);
     romanNr += code.repeat(charNr);
@@ -26,10 +26,8 @@ function convertToRoman(num) {
   return romanNr;
 }
 
-//* SeaShore 's solution
-function solution(number) {
-  // convert the number to a roman numeral
-  var roman = {
+function convertToArabic(roman) {
+  let codes = {
     M: 1000,
     CM: 900,
     D: 500,
@@ -45,41 +43,16 @@ function solution(number) {
     I: 1,
   };
 
-  var ans = "";
-  while (number > 0) {
-    for (a in roman) {
-      if (roman[a] <= number) {
-        ans += a;
-        number -= roman[a];
-        break;
-      }
-    }
+  let arabic = 0;
+  let prev = 0;
+  for (let ch of roman) {
+    prev = codes[ch];
+    console.log(prev);
+    if (codes[ch] >= prev) arabic += codes[ch];
+    return "It is not a roman number...";
   }
-  return ans;
+  return arabic;
 }
 
-//* thrap's solution
-function solution(number) {
-  const table = [
-    [1000, "M"],
-    [900, "CM"],
-    [500, "D"],
-    [400, "CD"],
-    [100, "C"],
-    [90, "XC"],
-    [50, "L"],
-    [40, "XL"],
-    [10, "X"],
-    [9, "IX"],
-    [5, "V"],
-    [4, "IV"],
-    [1, "I"],
-  ];
-
-  for (let [num, notation] of table) {
-    if (number >= num) return notation + solution(number - num);
-  }
-  return "";
-}
-
-console.log(convertToRoman(901));
+//console.log(convertToRoman(901));
+//console.log(convertToArabic("XII"));
